@@ -26,4 +26,6 @@ def compute_fitness_scores_list(population):
 
 def get_normalized_result_of_fitness_function_scores_list(population):
     fitness_scores_list = compute_fitness_scores_list(population)
-    return np.array(fitness_scores_list) / np.sum(fitness_scores_list)
+    map_to_minimalization_problem = list(map(lambda value: 1. / (value / 2.), fitness_scores_list))
+    normalized_results = np.array(map_to_minimalization_problem) / np.sum(map_to_minimalization_problem)
+    return normalized_results

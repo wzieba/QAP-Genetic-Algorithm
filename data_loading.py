@@ -16,7 +16,7 @@ def read_square_matrix(matrix_file) -> np.ndarray:
     return np.array(matrix)
 
 
-with open(os.path.join('../', 'res', 'data', 'had4.dat'), mode='r') as file:
+with open(os.path.join('../', 'res', 'data', 'test.dat'), mode='r') as file:
     matrices_size = int(file.readline())
     distance_matrix = read_square_matrix(file)
     flow_matrix = read_square_matrix(file)

@@ -21,3 +21,7 @@ class TestFitnessScore(TestCase):
     def test_invalid_parameters(self):
         with self.assertRaises(AssertionError):
             compute_fitness_scores_list(population=[[2, 1, 1, 1]])
+
+    def test_normalized_fitness_score_values(self):
+        scores_list = get_normalized_result_of_fitness_function_scores_list(population=TEST_POPULATION)
+        self.assertTrue(scores_list[2] < scores_list[0] < scores_list[1])
