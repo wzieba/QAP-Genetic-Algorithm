@@ -12,6 +12,7 @@ from data_loading import matrices_size, flow_matrix, distance_matrix
 def compute_fitness_scores_list(population):
     fitness_scores_list = []
     for chromosome in population:
+        assert len(chromosome) == len(set(chromosome))
         chromosome_fitness_sum = 0
         for x in range(matrices_size):
             x_place = chromosome[x] - 1
