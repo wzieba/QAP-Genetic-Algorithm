@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from selection import select_chromosome_using_roulette_method, generate_new_population_using_roulette_selection
+from src.selection import select_chromosome_using_roulette_method, generate_new_population_using_roulette_selection
 
 TEST_FITNESS_SCORES_LIST = [1, 2, 3]
 TEST_CUMULATIVE_SUM = [1, 3, 6]

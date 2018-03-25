@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from mutation import mutate_chromosome, mutate_population
+from src.mutation import mutate_chromosome, mutate_population
 
 TEST_CHROMOSOME_TO_MUTATE = [1, 2, 3, 4]
 TEST_POPULATION = [[1, 2, 3, 4], [3, 4, 1, 2], [4, 1, 3, 2]]

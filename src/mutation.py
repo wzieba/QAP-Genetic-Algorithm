@@ -1,6 +1,6 @@
 import random
 
-from config import mutation_probability
+from src.config import mutation_probability
 
 
 # In TSP and QAP problem mutation will have slightly different form. We will choose two genes and swap them.

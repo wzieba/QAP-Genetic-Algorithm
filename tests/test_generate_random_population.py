@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from generate_population import generate_random_population
+from src.generate_population import generate_random_population
 
 TEST_NUMBER_OF_RANDOM_CHROMOSOMES = 5
 TEST_NUMBER_OF_OBJECTS = 10
