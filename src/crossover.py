@@ -1,58 +1,73 @@
 import copy
 import random
-import numpy as np
 
 from src.config import crossover_probability
 
 
-def perform_crossover(population):  # Select for crossover
-    species_nc = []
-    crossover_list = []
-    for n_chrom in population:
-        rnd = random.uniform(0, 1)
-        if rnd < crossover_probability:
-            crossover_list.append(n_chrom)
-        else:
-            species_nc.append(n_chrom)
-    crossover_tuples = []
-    # Create crossover buddies
-    cr_iterate = list(enumerate(crossover_list))
-    while cr_iterate:
-        cch_idx, c_chrom = cr_iterate.pop()
-        if not cr_iterate:
-            species_nc.append(c_chrom)
-            break
-        cb_idx, cross_buddy = random.choice(cr_iterate)
-        cr_iterate = [(x_k, x_v) for x_k, x_v in cr_iterate if x_k != cb_idx]
-        crossover_tuples.append((c_chrom, cross_buddy))
-        # Crossover to list
-    after_cover = []
-    for cr_tup in crossover_tuples:
-        cr_o, cr_t = crossover_chromosomes(
-            cr_tup[0], cr_tup[1],
-            point_of_crossover=random.randint(0, len(cr_tup) - 1)
+def perform_crossover(population):
+    species_not_crossovered = []
+    species_to_crossover = []
+
+    choose_chromosomes_to_crossover(population, species_not_crossovered, species_to_crossover)
+
+    crossover_tuples = create_crossover_tuples(species_not_crossovered, species_to_crossover)
+
+    crossovered_species = crossover_population(crossover_tuples)
+
+    return crossovered_species + species_not_crossovered
+
+
+def crossover_population(crossover_tuples):
+    crossovered_species = []
+    for crossover_tuple in crossover_tuples:
+        child_a, child_b = crossover_chromosomes(
+            crossover_tuple,
+            point_of_crossover=random.randint(0, len(crossover_tuple) - 1)
         )
-        after_cover.append(cr_o)
-        after_cover.append(cr_t)
-    # New population
-    population = after_cover + species_nc
-    return population
+        crossovered_species.append(child_a)
+        crossovered_species.append(child_b)
+    return crossovered_species
 
 
-def crossover_chromosomes(chromosome_o, chromosome_s, point_of_crossover):
-    # Random point to crossover
-    chr_o, chr_s = copy.copy(chromosome_o), copy.copy(chromosome_s)
+def choose_chromosomes_to_crossover(population, species_not_crossovered, species_to_crossover):
+    for chromosome in population:
+        if random.uniform(0, 1) < crossover_probability:
+            species_to_crossover.append(chromosome)
+        else:
+            species_not_crossovered.append(chromosome)
+
+
+def create_crossover_tuples(species_not_crossovered, species_to_crossover):
+    crossover_tuples = []
+    species_to_crossover = list(enumerate(species_to_crossover))
+    while species_to_crossover:
+        chromosome_to_crossover_index, chromosome_to_crossover = species_to_crossover.pop()
+
+        if not species_to_crossover:
+            species_not_crossovered.append(chromosome_to_crossover)
+            break
+
+        crossover_buddy_index, crossover_buddy = random.choice(species_to_crossover)
+        species_to_crossover = list(filter(lambda value: value[0] != crossover_buddy_index, species_to_crossover))
+        crossover_tuples.append((chromosome_to_crossover, crossover_buddy))
+    return crossover_tuples
+
+
+def crossover_chromosomes(parents, point_of_crossover):
+    father, mother = parents
+    child_a, child_b = copy.copy(father), copy.copy(mother)
     # Change chromosome
-    for ch_idx in range(0, point_of_crossover):  # values on ind
-        fac_o = chr_o[ch_idx]
-        fac_s = chr_s[ch_idx]
+    for index in range(point_of_crossover):
+        # Values on index
+        value_a = child_a[index]
+        value_b = child_b[index]
         # Values for swap
-        fac_os_idx = chr_o.index(fac_s)
-        fac_so_idx = chr_s.index(fac_o)
+        index_of_value_b_in_a = child_a.index(value_b)
+        index_of_value_a_in_b = child_b.index(value_a)
         # Save values
-        chr_o[fac_os_idx] = fac_o
-        chr_s[fac_so_idx] = fac_s
+        child_a[index_of_value_b_in_a] = value_a
+        child_b[index_of_value_a_in_b] = value_b
         # Change values
-        chr_o[ch_idx] = fac_s
-        chr_s[ch_idx] = fac_o
-    return chr_o, chr_s
+        child_a[index] = value_b
+        child_b[index] = value_a
+    return child_a, child_b
