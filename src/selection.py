@@ -5,6 +5,11 @@ import random
 # Chromosomes with bigger fitness will be selected more times
 def generate_new_population_using_roulette_selection(population, fitness_scores_list):
     new_population = []
+
+    # Remove maximum value from every element so roullete selection will rely on bigger difference
+    worst_result = np.min(fitness_scores_list)
+    fitness_scores_list = list(map(lambda value: value - worst_result, fitness_scores_list))
+
     cumulative_sum = np.cumsum(fitness_scores_list)
 
     for _ in range(len(population)):
