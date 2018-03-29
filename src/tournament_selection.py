@@ -1,7 +1,7 @@
 import random
 
 
-def tournament_selection(population_list, fitness_scores_list, elitism=True):  # Create new population
+def tournament_selection(population_list, fitness_scores_list, elitism=False):  # Create new population
     new_species = []
     population_size = len(fitness_scores_list)
     population_size = population_size - 1 if elitism else population_size

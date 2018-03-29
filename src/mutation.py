@@ -1,6 +1,6 @@
 import random
 
-from src.config import mutation_probability
+from src.config import MUTATION_PROBABILITY
 
 
 # In TSP and QAP problem mutation will have slightly different form. We will choose two genes and swap them.
@@ -9,7 +9,7 @@ def mutate_population(population):
     chromosomes_with_mutated = []
 
     for chromosome in population:
-        if 0 <= random.uniform(0, 1) <= mutation_probability:
+        if 0 <= random.uniform(0, 1) <= MUTATION_PROBABILITY:
             mutated_chromosome = mutate_chromosome(chromosome, generate_random_gen_indexes(chromosome))
             chromosomes_with_mutated.append(mutated_chromosome)
         else:

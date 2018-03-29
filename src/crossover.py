@@ -1,7 +1,7 @@
 import copy
 import random
 
-from src.config import crossover_probability
+from src.config import CROSSOVER_PROBABILITY
 
 
 def perform_crossover(population):
@@ -31,7 +31,7 @@ def crossover_population(crossover_tuples):
 
 def choose_chromosomes_to_crossover(population, species_not_crossovered, species_to_crossover):
     for chromosome in population:
-        if random.uniform(0, 1) < crossover_probability:
+        if random.uniform(0, 1) < CROSSOVER_PROBABILITY:
             species_to_crossover.append(chromosome)
         else:
             species_not_crossovered.append(chromosome)
