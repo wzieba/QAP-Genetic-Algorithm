@@ -1,6 +1,6 @@
 import random
 
-from src.config import MUTATION_PROBABILITY
+from config import MUTATION_PROBABILITY
 
 
 class Mutation(object):

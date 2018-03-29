@@ -1,7 +1,7 @@
 import copy
 import random
 
-from src.config import CROSSOVER_PROBABILITY
+from config import CROSSOVER_PROBABILITY
 
 
 class Crossover(object):
