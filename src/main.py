@@ -6,7 +6,7 @@ from src.config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS
 from src.crossover import BasicCrossover, Crossover
 from src.data_loading import matrices_size, flow_matrix, distance_matrix
 from src.drawer import CustomDrawer
-from src.fitness_function import get_normalized_result_of_fitness_function_scores_list
+from src.fitness_function import get_normalized_result_of_fitness_function_scores_list, compute_fitness_scores_list
 from src.generate_population import generate_random_population
 from src.mutation import Mutation, BasicMutation
 from src.selection import Selection, TournamentSelection
@@ -33,12 +33,15 @@ def main():
               .format(epoch, np.mean(fitness_scores), max_fitness, max_chromosome))
 
     for epoch in range(NUMBER_OF_GENERATIONS):
-        fitness_scores = get_normalized_result_of_fitness_function_scores_list(population, distance_matrix, flow_matrix)
-        max_fitness = np.max(fitness_scores)
-        max_chromosome = population[np.argmax(fitness_scores)]
+
+        fitness_scores = compute_fitness_scores_list(population, distance_matrix, flow_matrix)
+        fitness_scores_normalized = get_normalized_result_of_fitness_function_scores_list(fitness_scores)
+
+        max_fitness = np.min(fitness_scores)
+        max_chromosome = population[np.argmin(fitness_scores)]
         max_chromosome = list(map(lambda value: value + 1, max_chromosome))
 
-        selected_chromosomes = selection_strategy.select(population, fitness_scores)
+        selected_chromosomes = selection_strategy.select(population, fitness_scores_normalized)
         crossed_chromosomes = crossover_strategy.crossover(selected_chromosomes)
         mutated_chromosomes = mutation_strategy.mutate(crossed_chromosomes)
 
