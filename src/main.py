@@ -1,18 +1,19 @@
 import time
-from colorsys import hsv_to_rgb
 
 import numpy as np
-from matplotlib import cm
 
-from data_loading import matrices_size, flow_matrix, distance_matrix
 from src.config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS
-from src.crossover import perform_crossover
+from src.crossover import BasicCrossover, Crossover
+from src.data_loading import matrices_size, flow_matrix, distance_matrix
 from src.drawer import CustomDrawer
-from src.fitness_function import compute_fitness_scores_list, get_normalized_result_of_fitness_function_scores_list
+from src.fitness_function import get_normalized_result_of_fitness_function_scores_list
 from src.generate_population import generate_random_population
-from src.mutation import mutate_population
-from src.selection import generate_new_population_using_roulette_selection
-from src.tournament_selection import tournament_selection
+from src.mutation import Mutation, BasicMutation
+from src.selection import Selection, TournamentSelection
+
+selection_strategy = Selection(selection_algorithm=TournamentSelection())
+mutation_strategy = Mutation(mutation_algorithm=BasicMutation())
+crossover_strategy = Crossover(crossover_algorithm=BasicCrossover())
 
 
 def main():
@@ -32,14 +33,14 @@ def main():
               .format(epoch, np.mean(fitness_scores), max_fitness, max_chromosome))
 
     for epoch in range(NUMBER_OF_GENERATIONS):
-        fitness_scores = get_normalized_result_of_fitness_function_scores_list(population)
+        fitness_scores = get_normalized_result_of_fitness_function_scores_list(population, distance_matrix, flow_matrix)
         max_fitness = np.max(fitness_scores)
         max_chromosome = population[np.argmax(fitness_scores)]
         max_chromosome = list(map(lambda value: value + 1, max_chromosome))
 
-        selected_chromosomes = tournament_selection(population, fitness_scores)
-        crossed_chromosomes = perform_crossover(selected_chromosomes)
-        mutated_chromosomes = mutate_population(crossed_chromosomes)
+        selected_chromosomes = selection_strategy.select(population, fitness_scores)
+        crossed_chromosomes = crossover_strategy.crossover(selected_chromosomes)
+        mutated_chromosomes = mutation_strategy.mutate(crossed_chromosomes)
 
         print_console_output()
         if previous_max_chromosome != max_chromosome:

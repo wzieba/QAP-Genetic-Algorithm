@@ -1,5 +1,4 @@
 import numpy as np
-from data_loading import matrices_size, flow_matrix, distance_matrix
 
 
 # Summary: The objective of the Quadratic Assignment Problem (QAP) is to assign n facilities to n locations in such a
@@ -9,7 +8,8 @@ from data_loading import matrices_size, flow_matrix, distance_matrix
 #  of facilities multiplied by the distance between their assigned locations.
 
 
-def compute_fitness_scores_list(population):
+def compute_fitness_scores_list(population, distance_matrix, flow_matrix):
+    matrices_size = distance_matrix.shape[0]
     fitness_scores_list = []
     for chromosome in population:
         assert len(chromosome) == len(set(chromosome))
@@ -22,8 +22,8 @@ def compute_fitness_scores_list(population):
     return fitness_scores_list
 
 
-def get_normalized_result_of_fitness_function_scores_list(population):
-    fitness_scores_list = compute_fitness_scores_list(population)
+def get_normalized_result_of_fitness_function_scores_list(population, distance_matrix, flow_matrix):
+    fitness_scores_list = compute_fitness_scores_list(population, distance_matrix, flow_matrix)
     map_to_minimization_problem = list(map(lambda value: 1. / value, fitness_scores_list))
     normalized_results = np.array(map_to_minimization_problem) / np.sum(map_to_minimization_problem)
     return normalized_results

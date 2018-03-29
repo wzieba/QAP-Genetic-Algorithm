@@ -50,3 +50,6 @@ fabric.properties
 
 #Venv
 venv/
+
+#PyCache
+src/__pycache__
