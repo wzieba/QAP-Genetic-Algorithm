@@ -2,7 +2,7 @@ import time
 
 import numpy as np
 
-from src.config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS
+from src.config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS, DRAW_VISUALIZATION
 from src.crossover import BasicCrossover, Crossover
 from src.data_loading import matrices_size, flow_matrix, distance_matrix
 from src.drawer import CustomDrawer
@@ -46,7 +46,7 @@ def main():
         mutated_chromosomes = mutation_strategy.mutate(crossed_chromosomes)
 
         print_console_output()
-        if previous_max_chromosome != max_chromosome:
+        if DRAW_VISUALIZATION and previous_max_chromosome != max_chromosome:
             draw_visual_frame()
 
         previous_max_chromosome = max_chromosome
