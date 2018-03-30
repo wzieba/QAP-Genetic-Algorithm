@@ -25,7 +25,7 @@ Feel free to experiment with them.
 
 ### Sample
 
-![Visualization](https://raw.githubusercontent.com/wzieba/QAP-Genetic-Algorithm/readme/static/visualization.gif "Visualization")
+![Visualization](https://raw.githubusercontent.com/wzieba/QAP-Genetic-Algorithm/master/static/visualization.gif "Visualization")
 
 ### Legend (how to read)
 
