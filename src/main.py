@@ -1,15 +1,20 @@
+import sys
+import os.path
+
 import time
 
 import numpy as np
 
-from config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS, DRAW_VISUALIZATION
-from crossover import BasicCrossover, Crossover
-from data_loading import matrices_size, flow_matrix, distance_matrix
-from drawer import CustomDrawer
-from fitness_function import get_normalized_result_of_fitness_function_scores_list, compute_fitness_scores_list
-from generate_population import generate_random_population
-from mutation import Mutation, BasicMutation
-from selection import Selection, TournamentSelection
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from src.config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS, DRAW_VISUALIZATION
+from src.crossover import BasicCrossover, Crossover
+from src.data_loading import matrices_size, flow_matrix, distance_matrix
+from src.drawer import CustomDrawer
+from src.fitness_function import get_normalized_result_of_fitness_function_scores_list, compute_fitness_scores_list
+from src.generate_population import generate_random_population
+from src.mutation import Mutation, BasicMutation
+from src.selection import Selection, TournamentSelection
 
 selection_strategy = Selection(selection_algorithm=TournamentSelection())
 mutation_strategy = Mutation(mutation_algorithm=BasicMutation())
