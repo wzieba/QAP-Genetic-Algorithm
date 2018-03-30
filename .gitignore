@@ -53,3 +53,7 @@ venv/
 
 #PyCache
 src/__pycache__
+
+#Coverage
+.coverage
+src/.coverage

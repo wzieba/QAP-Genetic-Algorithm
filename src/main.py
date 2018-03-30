@@ -1,6 +1,11 @@
+import sys
+import os.path
+
 import time
 
 import numpy as np
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from src.config import INITIAL_POPULATION_SIZE, NUMBER_OF_GENERATIONS, DRAW_VISUALIZATION
 from src.crossover import BasicCrossover, Crossover

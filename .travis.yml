@@ -1,0 +1,15 @@
+sudo: false
+
+language: python
+
+python:
+  - 3.6.4
+
+install:
+  - pip install codecov
+
+script:
+  - coverage run --source=. -m unittest discover .
+
+after_success:
+  - codecov
