@@ -1,10 +1,10 @@
-# QAP with GA 🐒
+# QAP with GA 🐒 [![Build Status](https://travis-ci.org/wzieba/QAP-Genetic-Algorithm.svg?branch=master)](https://travis-ci.org/wzieba/QAP-Genetic-Algorithm) [![codecov](https://codecov.io/gh/wzieba/QAP-Genetic-Algorithm/branch/master/graph/badge.svg)](https://codecov.io/gh/wzieba/QAP-Genetic-Algorithm)
 
 Resolving Quadratic Assignment Problem with Genetic Algorithm
 
 ## 🚀 Getting Started
 
-To run clone repo, go to *src* folder and run
+To run clone repo, go to `src` folder and run
 ```
 python main.py
 ```
