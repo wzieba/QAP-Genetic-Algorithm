@@ -13,26 +13,34 @@ python main.py
 
 In `config.py` you can find following configuration options:
 ```
-CROSSOVER_PROBABILITY = 0.6
+INPUT_FILE = "had12.dat"
+CROSSOVER_PROBABILITY = 0.7
 MUTATION_PROBABILITY = 0.08
-INITIAL_POPULATION_SIZE = 1000
-NUMBER_OF_GENERATIONS = 10000
+POPULATION_SIZE = 100
+NUMBER_OF_GENERATIONS = 100
 DRAW_VISUALIZATION = True
+DRAW_CHART = True
 ```
 Feel free to experiment with them.
 
 ## 📈 Visualization
 
-### Sample
+### Simulation
 
 ![Visualization](https://raw.githubusercontent.com/wzieba/QAP-Genetic-Algorithm/master/static/visualization.gif "Visualization")
 
-### Legend (how to read)
+#### Legend (how to read)
 
 - Red color of line means long distance, green one - short
-- Thick line means big value of flow, thick one - small
+- Thick line means big value of flow (aka cost), thin one - small
 
 Both values are in context of particular distance and flow matrices
+
+In short: thin green is better than thick red
+
+### Charts
+
+![Chart](https://raw.githubusercontent.com/wzieba/QAP-Genetic-Algorithm/master/static/chart.png "Chart")
 
 ## 🚚 Quadratic Assignment Problem
 
