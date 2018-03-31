@@ -2,6 +2,8 @@ import os
 
 import numpy as np
 
+from src.config import INPUT_FILE
+
 
 def read_square_matrix(matrix_file) -> np.ndarray:
     matrix = []
@@ -16,7 +18,7 @@ def read_square_matrix(matrix_file) -> np.ndarray:
     return np.array(matrix)
 
 
-with open(os.path.join('../res', 'data', 'had12.dat'), mode='r') as file:
+with open(os.path.join('../res', 'data', INPUT_FILE), mode='r') as file:
     matrices_size = int(file.readline())
     distance_matrix = read_square_matrix(file)
     flow_matrix = read_square_matrix(file)

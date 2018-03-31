@@ -1,8 +1,8 @@
 import math
-import turtle
-from colorsys import hsv_to_rgb
-import numpy as np
 import sys
+import turtle
+
+import numpy as np
 
 
 class CustomDrawer(turtle.Turtle):
